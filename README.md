@@ -1,4 +1,4 @@
-# 課題03 メモ帳アプリ
+# 課題03 LocalStorage
 
 ![実行画面](images/kadai03.png) 
 
