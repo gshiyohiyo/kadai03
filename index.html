@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CrystalMark X24</title>
+    <link rel="stylesheet" href="css/style.css">
+    <script
+        src="https://code.jquery.com/jquery-3.7.0.min.js"
+        integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g="
+        crossorigin="anonymous"></script>
+    <script src="js/app.js"></script>
+</head>
+<body>
+    <main>
+    <h1>CrystalMark X24</h1>
+
+    <div class="container">
+        <div class="menu">
+            <button id="benchmark" class="button-053">
+                ベンチマーク
+            </button>
+            <button id="clear" class="button-052">
+                <span>注意</span>
+                <span>データ削除</span>
+            </button>
+        </div>        
+        <div id="list"></div>
+    </div>
+    <script>
+        // benchmark クリックイベント
+        $("#benchmark").on("click", function(){
+            const key = localStorage.length + 1;
+            const single = benchmark();
+            const platform = "Web";
+            const cpu = "Unknown";
+            const system = "Unknown";
+            const now = new Date();
+            const date = now.toLocaleString();
+
+            const jsonValue = {
+                "id": key,
+                "single": single,
+                "platform": platform,
+                "cpu": cpu,
+                "system": system,
+                "date": date
+            };
+
+            let value = JSON.stringify(jsonValue);
+            localStorage.setItem(key, value);
+
+            showLocalStorage();
+        });
+
+        // clear クリックイベント
+        $("#clear").on("click", function(){
+            //保存データを削除
+            localStorage.clear();
+            //表示データを削除
+            $("#list").empty();
+        });
+
+        // 読み込みが完了したら実行
+        $(function(){
+            showLocalStorage();
+        });
+        </script>
+    </main>
+</body>
+</html>
